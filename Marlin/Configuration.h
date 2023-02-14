@@ -26,8 +26,8 @@
 // #define R4_PRO    // R4_pro:pro
 
 // 使用了st芯片
-#define ST32_SHIP
-// #define USE_GD32
+//#define ST32_SHIP
+#define USE_GD32
 #define HAS_UDISK
 
 /* D2:230*230*260
@@ -43,9 +43,9 @@
   #define Z_BED_SIZE 400
 #else
   // #define X_BED_SIZE 210
-  #define X_BED_SIZE 230
-  #define Y_BED_SIZE 230
-  #define Z_BED_SIZE 260
+  #define X_BED_SIZE 320
+  #define Y_BED_SIZE 320
+  #define Z_BED_SIZE 400
 #endif
 
 #define D301_AUTO_LEVELING
@@ -184,7 +184,7 @@
 #ifdef OTHER_CUSTOM
   #define CUSTOM_MACHINE_NAME "D301 F4"
 #else
-  #define CUSTOM_MACHINE_NAME "MD D301 F4"
+  #define CUSTOM_MACHINE_NAME "MMPRO"
 #endif
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -750,16 +750,16 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#if 0
-#define X_DRIVER_TYPE  TMC2208
-#define Y_DRIVER_TYPE  TMC2208
+
+#define X_DRIVER_TYPE  TMC2209
+#define Y_DRIVER_TYPE  TMC2209
 #define Z_DRIVER_TYPE  TMC2208
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 #define Z2_DRIVER_TYPE TMC2208
 //#define Z3_DRIVER_TYPE A4988
 //#define Z4_DRIVER_TYPE A4988
-#define E0_DRIVER_TYPE TMC2208
+#define E0_DRIVER_TYPE TMC2209
 //#define E1_DRIVER_TYPE A4988
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
@@ -767,24 +767,6 @@
 //#define E5_DRIVER_TYPE A4988
 //#define E6_DRIVER_TYPE A4988
 //#define E7_DRIVER_TYPE A4988
-#else
-#define X_DRIVER_TYPE  TMC2208
-#define Y_DRIVER_TYPE  TMC2208
-#define Z_DRIVER_TYPE  TMC2208
-//#define X2_DRIVER_TYPE A4988
-//#define Y2_DRIVER_TYPE A4988
-#define Z2_DRIVER_TYPE TMC2208
-//#define Z3_DRIVER_TYPE A4988
-//#define Z4_DRIVER_TYPE A4988
-#define E0_DRIVER_TYPE TMC2208
-//#define E1_DRIVER_TYPE A4988
-//#define E2_DRIVER_TYPE A4988
-//#define E3_DRIVER_TYPE A4988
-//#define E4_DRIVER_TYPE A4988
-//#define E5_DRIVER_TYPE A4988
-//#define E6_DRIVER_TYPE A4988
-//#define E7_DRIVER_TYPE A4988
-#endif
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
@@ -886,7 +868,7 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-#define CLASSIC_JERK
+//#define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
   #define DEFAULT_XJERK 10.0
   #define DEFAULT_YJERK 10.0
@@ -900,7 +882,7 @@
   #endif
 #endif
 
-#define DEFAULT_EJERK    7.0  // May be used by Linear Advance
+#define DEFAULT_EJERK    5.0  // May be used by Linear Advance
 
 /**
  * Junction Deviation Factor
@@ -1088,13 +1070,13 @@
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 30
+#define PROBING_MARGIN 20
 #if ENABLED(R3_PRO) || ENABLED(R4_PRO)
   #define PROBING_MARGIN_X (int)X_BED_SIZE*10/35
   #define PROBING_MARGIN_Y 60
 #else
-  #define PROBING_MARGIN_X (int)X_BED_SIZE/3
-  #define PROBING_MARGIN_Y 40
+  #define PROBING_MARGIN_X PROBING_MARGIN
+  #define PROBING_MARGIN_Y PROBING_MARGIN
 #endif
 
 // 探针在X轴和Y轴之间的移动速度(mm/min)
@@ -1119,8 +1101,8 @@
  * A total of 2 does fast/slow probes with a weighted average.
  * A total of 3 or more adds more slow probes, taking the average.
  */
-//#define MULTIPLE_PROBING 2
-//#define EXTRA_PROBING    1
+#define MULTIPLE_PROBING 2
+#define EXTRA_PROBING    1
 
 /**
  * Z probes require clearance when deploying, stowing, and moving between
@@ -1418,8 +1400,8 @@
     #define GRID_MAX_POINTS_X 3 //调平点阵6*6
     #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X*2
   #else
-    #define GRID_MAX_POINTS_X 2 //调平点阵4*4
-    #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X*2
+    #define GRID_MAX_POINTS_X 6 //调平点阵4*4
+    #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
   #endif
 
 
